@@ -1,6 +1,6 @@
 /************************************************Reapter v_1.0*********************************************************/
 class NgRepeat extends HTMLElement {
-  connectedCallback() {
+  protected connectedCallback() {
     if (this.getAttribute('shadow') != "false") {
       this.attachShadow({ mode: 'open' });
     }
@@ -35,7 +35,7 @@ class NgRepeat extends HTMLElement {
       console.log(err);
     });
   }
-  attributeChangedCallback(name: any) {
+  protected attributeChangedCallback(name: any) {
     switch (name) {
       case "content":
         this.render();
@@ -45,7 +45,7 @@ class NgRepeat extends HTMLElement {
 
   private interpolate(template: string, obj: { [x: string]: any; }) {
     if (typeof obj == "object") {
-      for (var key in obj) {
+      for (let key in obj) {
         const find = "{{" + key + "}}";
         if (template.indexOf(find) > -1) {
           template = template.replace(find, obj[key]);
